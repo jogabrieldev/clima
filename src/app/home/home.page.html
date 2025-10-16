@@ -1,20 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      🌤️ Bem-vindo ao ClimateApp
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="home-content">
+  
+  <div class="center-container">
+  <div class="hero">
+    <div class="hero-icons">
+      <ion-icon [icon]="sunny"></ion-icon>
+      <ion-icon [icon]="cloud"></ion-icon>
+      <ion-icon [icon]="umbrella"></ion-icon>
+    </div>
+    <h1>Descubra o clima de qualquer cidade</h1>
+    <p>Temperatura, vento, umidade e condições meteorológicas em tempo real.</p>
+    <ion-button routerLink="/climate" size="large" color="secondary">
+      Ver clima
+    </ion-button>
   </div>
+</div>
+
 </ion-content>
+
