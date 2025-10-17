@@ -1,13 +1,72 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>climate</ion-title>
+<ion-header>
+  <ion-toolbar color="dark"> <!-- toolbar com cor escura -->
+
+    <!-- Botão de voltar pequeno -->
+    <ion-buttons slot="start">
+      <ion-button size="small" (click)="goBack()" fill="clear" color="light">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Título -->
+    <ion-title>ClimateApp</ion-title>
+
+    <!-- Botão de reload pequeno -->
+    <ion-buttons slot="end">
+      <ion-button size="small" (click)="reloadPage()" fill="clear" color="light">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">climate</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content [fullscreen]="true" class="climate-page ion-padding">
+
+
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Buscando clima...</p>
+  </div>
+
+  <!-- ERRO -->
+  <div *ngIf="errorMessage" class="error-msg">
+    {{ errorMessage }}
+  </div>
+
+  <!-- RESULTADO DO CLIMA -->
+  <ion-card *ngIf="weatherData" class="weather-card ion-margin-top">
+    <ion-card-header>
+      <ion-card-title>{{ weatherData.location.name }}</ion-card-title>
+      <ion-card-subtitle>{{ weatherData.location.region }}, {{ weatherData.location.country }}</ion-card-subtitle>
+  
+       <ion-card-subtitle class="last-updated" *ngIf="weatherData.current.last_updated_date">
+    Última atualização: {{ weatherData.current.last_updated_date | date:'dd/MM/yyyy HH:mm' }}
+  </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content class="weather-content ion-text-center">
+     <img [src]="weatherData.current.condition.icon" [alt]="weatherData.current.condition.text" />
+
+      <h2>{{ weatherData.current.temp_c }} °C</h2>
+      <p>{{ weatherData.current.condition.text }}</p>
+
+    <ion-card-content class="weather-content ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" class="weather-info bordered-info">
+          <span>Umidade: {{ weatherData.current.humidity }}%</span>
+        </ion-col>
+        <ion-col size="6" class="weather-info bordered-info">
+          <span>Vento: {{ weatherData.current.wind_kph }} km/h</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

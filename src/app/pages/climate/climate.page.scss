@@ -1,0 +1,108 @@
+
+// Estilo para a pagina de clima
+.climate-page {
+  background: #2f2f2f; 
+  color: #ffffff; 
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.last-updated {
+  font-size: 0.8rem;
+  color: #8f8787;
+  text-align: right;
+  margin-top: 5px;
+}
+
+
+.climate-body {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  padding: 20px;
+}
+
+.climate-header {
+  --background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+  border-radius: 0 0 16px 16px;
+}
+
+.climate-page {
+  background: linear-gradient(to bottom, #d2dae0, #00f2fe);
+  min-height: 100%;
+  color: #fff;
+
+  ion-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+
+    ion-input {
+      color: #fff;
+    }
+
+    ion-button {
+      --background: #ffffff33;
+      color: #fff;
+    }
+  }
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  .error-msg {
+    margin-top: 1rem;
+    text-align: center;
+    color: #ff6961;
+    font-weight: bold;
+  }
+
+  .weather-card {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 16px;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .weather-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+
+      ion-icon {
+        margin-right: 0.5rem;
+        font-size: 1.5rem;
+      }
+    }
+  };
+};

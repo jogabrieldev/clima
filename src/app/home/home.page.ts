@@ -7,7 +7,7 @@ import { sunny, cloud, umbrella } from 'ionicons/icons'
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [IonHeader, IonToolbar, IonTitle, IonContent , IonButton, RouterModule],
-   schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePage {
   sunny = sunny;

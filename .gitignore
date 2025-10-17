@@ -68,3 +68,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#Chaves 
+src/environments/environment.ts

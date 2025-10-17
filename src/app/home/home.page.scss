@@ -1,3 +1,4 @@
+// Estio pagina inicial
 .home-content {
   display: flex;
   justify-content: center;
@@ -12,10 +13,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* ocupa toda a altura do ion-content */
+  height: 100%; 
   width: 100%;
 }
-
 
 .hero {
   background-color: rgba(0, 0, 0, 0.4);

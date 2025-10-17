@@ -1,0 +1,48 @@
+<ion-content  class="card-page ion-padding">
+  <div class="weather-card">
+    <div class="card-header">
+      <h2>🌤️ Buscar clima</h2>
+    </div>
+
+    <div class="modal-icons">
+      <ion-icon name="sunny-outline" color="warning"></ion-icon>
+      <ion-icon name="cloud-outline" color="medium"></ion-icon>
+      <ion-icon name="rainy-outline" color="primary"></ion-icon>
+    </div>
+
+     <div class="radio-group">
+      <h3>Buscar por:</h3>
+      <ion-radio-group [(ngModel)]="searchType">
+        <div class="radio-options">
+          <ion-item lines="none">
+            <ion-radio slot="start" value="city"></ion-radio>
+            <ion-label>Cidade</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-radio slot="start" value="cep"></ion-radio>
+            <ion-label>CEP</ion-label>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </div>
+
+    <ion-item class="container-input">
+      <ion-label position="floating">
+        {{ searchType === 'city' ? 'Digite a cidade' : 'Digite o CEP' }}
+      </ion-label>
+      <ion-input
+        [(ngModel)]="query"
+        [type]="searchType === 'cep' ? 'tel' : 'text'"
+        [maxlength]="searchType === 'cep' ? 9 : 50"
+        placeholder="{{ searchType === 'city' ? 'Ex: São Paulo' : 'Ex: 01001000' }}"
+        class="input-query"
+      ></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="submitSearch()" class="btn-search">
+      Buscar
+    </ion-button>
+  </div>
+</ion-content>
+
+
