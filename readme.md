@@ -53,7 +53,7 @@ _*MELHORIAS PARA O PROJETO*
 
 **Permitir o usuário estilizar seu cenario onde vai esta sendo feita a busca e tendo as resposta**
 
-
+**Parametrizar as cidades e estados que a pesquisa vai ser bem sucedida, caso o usuário digitar uma cidade não valida mostra um erro**
 ## 🚀 Como rodar o projeto
 
 *E preciso ter as APIs Key para que os services fucione e busque os climas*
