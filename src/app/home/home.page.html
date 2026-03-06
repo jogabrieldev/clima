@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title>
       🌤️ Bem-vindo ao ClimateApp
     </ion-title>
@@ -7,17 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="home-content">
-  
+   
   <div class="center-container">
   <div class="hero">
     <div class="hero-icons">
-      <ion-icon [icon]="sunny"></ion-icon>
-      <ion-icon [icon]="cloud"></ion-icon>
-      <ion-icon [icon]="umbrella"></ion-icon>
+      <ion-icon [icon]="sunny" color="warning"></ion-icon>
+      <ion-icon [icon]="cloud" color="black"></ion-icon>
+      <ion-icon [icon]="umbrella" color="warning"></ion-icon>
     </div>
-    <h1>Descubra o clima de qualquer cidade</h1>
+    <h1>Descubra o clima de qualquer cidade do brasil</h1>
     <p>Temperatura, vento, umidade e condições meteorológicas em tempo real.</p>
-    <ion-button routerLink="/climate" size="large" color="secondary">
+    <ion-button class="btn" routerLink="/climate" size="large" color="warning">
       Ver clima
     </ion-button>
   </div>

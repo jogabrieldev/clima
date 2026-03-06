@@ -62,6 +62,9 @@ _*MELHORIAS PARA O PROJETO*
 
 [https://www.weatherapi.com/]
 
+
+*Monte Sua variaveis de ambiente no arquivo enverimoent*
+
 (Importe o repositorio)
 
 1. **Instalar dependências**
