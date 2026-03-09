@@ -1,6 +1,5 @@
-//Estilo da modal de busca de clima 
 .weather-card {
-  background: #ffffff;
+  background: #0fa4b8;
   border-radius: 20px;
   width: 100%;
   max-width: 420px;
@@ -9,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
+  margin-top:38%;
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
@@ -30,7 +29,6 @@
   font-size: 3rem;
 }
 
-
 .radio-group {
   width: 100%;
   margin-bottom: 20px;
@@ -42,33 +40,6 @@
   color: #1e272e;
   font-size: 1rem;
   font-weight: 600;
-}
-
-.radio-options {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-
-  ion-item {
-    --background: transparent;
-    --inner-padding-end: 0;
-    --inner-padding-start: 0;
-    --min-height: 30px;
-    font-size: 0.95rem;
-
-    ion-label {
-      color: #1e272e;
-      font-weight: 500;
-    }
-
-    ion-radio {
-      --color: #1e272e;
-      --color-checked: #007aff;
-      --border-color: #1e272e;
-      --border-color-checked: #007aff;
-      --inner-border-width: 2px;
-    }
-  }
 }
 
 .container-input {
@@ -104,7 +75,7 @@
 
 .btn-search {
   --background: linear-gradient(135deg, #4facfe, #00c6ff);
-  --color: #fff;
+  --color: #000000;
   --border-radius: 14px;
   --padding-top: 14px;
   --padding-bottom: 14px;
@@ -114,6 +85,33 @@
   text-transform: uppercase;
   width: 100%;
   box-shadow: 0 6px 14px rgba(79, 172, 254, 0.35);
+
+}
+
+.radio-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+  ion-item {
+    --background: #0d0d0e;
+    color :#f7f7f7;
+    --min-height: 40px;
+    padding: 0; 
+    width: auto;
+    ion-radio {
+      --color: #f7f7f7; 
+      --color-checked: #4facfe; 
+      --radio-border-width: 2px;
+      margin-inline-end: 8px;
+      font-size: 0.9rem;
+    }
+    ion-label {
+      margin: 0 !important;
+      color: #1e272e;
+      font-weight: 500;
+    }
+  }
 }
 
 @media (max-width: 480px) {
@@ -134,3 +132,5 @@
     font-size: 1rem;
   }
 }
+
+

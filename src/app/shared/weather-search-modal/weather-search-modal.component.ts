@@ -21,7 +21,7 @@ addIcons({
 })
 export class WeatherSearchModalComponent {
   query: string = '';
-  searchType: 'city' | 'cep' = 'city';
+  searchType: string ="city";
 
   constructor(
     private modalCtrl: ModalController,
@@ -31,8 +31,7 @@ export class WeatherSearchModalComponent {
     this.modalCtrl.dismiss();
   }
   
-
-   submitSearch() {
+  submitSearch() {
     if (!this.query.trim()) {
       return;
     }
