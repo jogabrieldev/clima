@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,Output, EventEmitter } from '@angular/core';
 import { ModalController, IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -20,22 +20,22 @@ addIcons({
   imports: [IonicModule, FormsModule, CommonModule]
 })
 export class WeatherSearchModalComponent {
-  query: string = '';
-  searchType: string ="city";
+  public query: string = '';
+  public searchType: string ="city";
+  @Output() onSearch = new EventEmitter<any>()
 
   constructor(
     private modalCtrl: ModalController,
   ) {}
 
   closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(null);
   }
   
   submitSearch() {
     if (!this.query.trim()) {
       return;
     }
-
     const searchData = {
       type: this.searchType,
       value: this.query.trim(),

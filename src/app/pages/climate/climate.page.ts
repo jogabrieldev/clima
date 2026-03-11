@@ -8,7 +8,6 @@ import { WeatherSearchModalComponent } from '../../shared/weather-search-modal/w
 import { CityWeatherService } from 'src/services/weather.service';
 import { CepWeatherService } from 'src/services/cep.weather.service';
 
-// ÍCONES PERSONALIZADOS
 addIcons({
   'arrow-back-outline': arrowBackOutline,
   'refresh-outline': refreshOutline,
@@ -22,12 +21,12 @@ addIcons({
   imports: [IonicModule, CommonModule, FormsModule],
 })
 
-// PAGINA PRINCIPAL DE CLIMA
 export class ClimatePage implements OnInit {
-  query: string = '';
-  weatherData: any = null;
-  loading: boolean = false;
-  errorMessage: string = '';
+  public query: string = '';
+  public weatherData: any = null;
+  public loading: boolean = false;
+  public showModal:boolean = true;
+  public errorMessage: string = '';
 
   constructor(
     private modalCtrl: ModalController,
@@ -36,78 +35,70 @@ export class ClimatePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.openWeatherModal();
+    this.openSearchModal();
   };
 
-  reloadPage() {
-  window.location.reload();
-};
-
-goBack() {
-  window.history.back(); 
-};
-
-
-  async openWeatherModal() {
+  async openSearchModal() {
     const modal = await this.modalCtrl.create({
-      component: WeatherSearchModalComponent ,
-      cssClass: 'weather-modal',
-      backdropDismiss: false,
+      component: WeatherSearchModalComponent,
+      cssClass: 'custom-modal-center',
+      backdropDismiss: true,
+      mode: 'md'
     });
-
-    modal.onDidDismiss().then((result) => {
-      if (result.data) {
-        const { type, value } = result.data;
-
-        this.query = value.trim();
-
-        if (type === 'cep') {
-          this.fetchByCep(this.query);
-        } else {
-          this.fetchWeather(this.query);
-        }
-      }
-    });
-
     await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.handleSearch(data);
+    }else{
+      throw new Error("Nenhuma busca realizada. Modal fechada sem ação.")
+    }
   }
 
-fetchWeather(city: string) {
-  this.weatherData = null;
-  this.errorMessage = '';
-  this.loading = true;
-
-  this.weatherService.getWeather(city).subscribe({
-    next: (data) => {
-      // converte last_updated para Date
-      const lastUpdatedDate = new Date(data.current.last_updated.replace(' ', 'T'));
-
-      this.weatherData = {
-        ...data,
-        current: {
-          ...data.current,
-          last_updated_date: lastUpdatedDate // adiciona uma nova propriedade Date
-        }
-      };
-      console.log(this.weatherData);
-      this.loading = false;
-    },
-    error: () => {
-      this.errorMessage = 'Cidade não encontrada.';
-      this.loading = false;
-    },
-  });
-}
-
+  handleSearch(event: any) {
+    if (event) {
+      const { type, value } = event;
+      this.query = value.trim();
+      this.showModal = false; 
+      if (type === 'cep') {
+        this.fetchByCep(this.query);
+      } else {
+        this.fetchWeather(this.query);
+      }
+    } else {
+      this.showModal = false;
+    }
+  }
+  fetchWeather(city: string) {
+   if(city) return;
+   this.weatherData = null;
+   this.errorMessage = '';
+   this.loading = true;
+    this.weatherService.getWeather(city).subscribe({
+      next: (data) => {
+       const lastUpdatedDate = new Date(data.current.last_updated.replace(' ', 'T'));
+        this.weatherData = {
+         ...data,
+          current: {
+           ...data.current,
+           last_updated_date: lastUpdatedDate
+          }
+        };
+        this.loading = false;
+      },
+      error: () => {
+       this.errorMessage = 'Cidade não encontrada.';
+       this.loading = false;
+      },
+    });
+  }
 
   fetchByCep(cep: string) {
+    if(!cep)return;
     this.weatherData = null;
     this.errorMessage = '';
     this.loading = true;
-
     this.cepWeatherService.getWeatherByCep(cep).subscribe({
       next: (data) => {
-
         const lastUpdatedDate = new Date(data.dt * 1000);
         this.weatherData = {
           location: {
@@ -129,8 +120,7 @@ fetchWeather(city: string) {
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage =
-          err.message || 'CEP não encontrado ou erro ao buscar clima.';
+        this.errorMessage = err.message || 'CEP não encontrado.';
         this.loading = false;
       },
     });

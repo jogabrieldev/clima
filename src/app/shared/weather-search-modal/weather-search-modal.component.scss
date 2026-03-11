@@ -1,136 +1,70 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .weather-card {
-  background: #0fa4b8;
-  border-radius: 20px;
+  background: rgba(15, 164, 184, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
   width: 100%;
-  max-width: 420px;
+  height: 100%;
   padding: 30px 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top:38%;
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  }
+  box-sizing: border-box;
 }
 
 .card-header h2 {
-  color: #1e272e;
+  color: #ffffff;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .modal-icons {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
+  font-size: 3.5rem;
   margin-bottom: 25px;
-  font-size: 3rem;
+  gap: 20px;
 }
 
 .radio-group {
   width: 100%;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.radio-group h3 {
-  margin-bottom: 8px;
-  color: #1e272e;
-  font-size: 1rem;
-  font-weight: 600;
+  .radio-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    ion-item {
+     --background: rgba(0, 0, 0, 0.2);
+     --color: #ffffff;
+     --border-radius: 12px;
+     margin-bottom: 0;
+     width: 110px;
+    }
+  }
 }
 
 .container-input {
   width: 100%;
-  margin: 20px 0;
-  border-radius: 14px;
-  background: #f9fafb;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  --background: transparent;
+  margin: 25px 0;
+  --background: rgba(255, 255, 255, 0.9);
+  --border-radius: 14px;
+  --color: #1e272e;
+}
 
-  &:focus-within {
-    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25);
-    background: #eef6ff;
-  }
-
-  ion-label {
-    font-weight: 500;
-    color: #1e272e;
-    font-size: 1rem;
-  }
-
-  .input-query {
-    color: #1e272e;
-    font-weight: 500;
-    font-size: 1rem;
-  }
-
-  ::placeholder {
-    color: #555;
-    opacity: 0.8;
-  }
+.action-buttons {
+  width: 100%;
+  margin-top: auto;
 }
 
 .btn-search {
-  --background: linear-gradient(135deg, #4facfe, #00c6ff);
-  --color: #000000;
+  --background: #1e272e;
+  --color: #ffffff;
   --border-radius: 14px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  font-size: 1.05rem;
-  text-transform: uppercase;
-  width: 100%;
-  box-shadow: 0 6px 14px rgba(79, 172, 254, 0.35);
-
+  margin-bottom: 8px;
+  width: 25%;
+  height: 50px;
 }
-
-.radio-options {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-
-  ion-item {
-    --background: #0d0d0e;
-    color :#f7f7f7;
-    --min-height: 40px;
-    padding: 0; 
-    width: auto;
-    ion-radio {
-      --color: #f7f7f7; 
-      --color-checked: #4facfe; 
-      --radio-border-width: 2px;
-      margin-inline-end: 8px;
-      font-size: 0.9rem;
-    }
-    ion-label {
-      margin: 0 !important;
-      color: #1e272e;
-      font-weight: 500;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .weather-card {
-    padding: 20px 18px;
-  }
-
-  .modal-icons {
-    font-size: 2.3rem;
-    gap: 15px;
-  }
-
-  .radio-options {
-    gap: 15px;
-  }
-
-  .btn-search {
-    font-size: 1rem;
-  }
-}
-
-

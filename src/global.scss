@@ -33,3 +33,24 @@
  */
 
 /* src/global.scss */
+
+// Styles globais para o aplicativo
+.custom-modal-center {
+  --width: 90%;      
+  --max-width: 550px;
+  --height: fit-content 
+  --height: auto; 
+  --max-height: 500px;
+  --border-radius: 16px;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::part(content) {
+    position: relative;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+}

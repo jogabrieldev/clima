@@ -1,45 +1,41 @@
-<ion-content  class="card-page ion-padding">
-  <div class="weather-card">
-    <div class="card-header">
-      <h2>🌤️ Buscar clima</h2>
-    </div>
 
-    <div class="modal-icons">
-      <ion-icon name="sunny-outline" color="warning"></ion-icon>
-      <ion-icon name="cloud-outline" color="medium"></ion-icon>
-      <ion-icon name="rainy-outline" color="primary"></ion-icon>
-    </div>
-
-     <div class="radio-group">
-      <h3>Buscar por:</h3>
-      <ion-radio-group [(ngModel)]="searchType" (ionChange)="query = ''">
-  <div class="radio-options">
-    <ion-item lines="none">
-      <ion-radio slot="start" value="city">Cidade</ion-radio>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-radio slot="start" value="cep">CEP</ion-radio>
-    </ion-item>
+<main class="weather-card">
+  <header class="card-header">
+    <h2>🌤️ Buscar clima</h2>
+  </header>
+  <div class="modal-icons">
+    <ion-icon name="sunny-outline" color="warning"></ion-icon>
+    <ion-icon name="cloud-outline" color="medium"></ion-icon>
+    <ion-icon name="rainy-outline" color="primary"></ion-icon>
   </div>
-</ion-radio-group>
-    </div>
-
-    <ion-item class="container-input" lines="none">
-  <ion-input
-    label="{{ searchType === 'city' ? 'Digite a cidade' : 'Digite o CEP' }}"
-    label-placement="floating"
-    [(ngModel)]="query"
-    [type]="searchType === 'cep' ? 'tel' : 'text'"
-    [maxlength]="searchType === 'cep' ? 9 : 50"
-    placeholder="{{ searchType === 'city' ? 'Ex: São Paulo' : 'Ex: 01001000' }}"
-    class="input-query"
-  ></ion-input>
-</ion-item>
-
-    <ion-button expand="block" (click)="submitSearch()" class="btn-search">
-      Buscar
-    </ion-button>
-  </div>
-</ion-content>
-
+  <section class="radio-group">
+    <ion-radio-group [(ngModel)]="searchType" (ionChange)="query = ''">
+      <div class="radio-options">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="city">Cidade</ion-radio>
+        </ion-item>
+       <ion-item lines="none">
+         <ion-radio slot="start" value="cep">CEP</ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </section>
+  <ion-item class="container-input" lines="none">
+    <ion-input
+     label="{{ searchType === 'city' ? 'Digite a cidade' : 'Digite o CEP' }}"
+     label-placement="floating"
+     [(ngModel)]="query"
+     [type]="searchType === 'cep' ? 'tel' : 'text'"
+     [maxlength]="searchType === 'cep' ? 9 : 50"
+     placeholder="{{ searchType === 'city' ? 'Ex: São Paulo' : 'Ex: 01001000' }}"
+     class="input-query">
+    </ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="submitSearch()" class="btn-search">
+    Buscar
+  </ion-button>
+  <ion-button expand="block" fill="clear" color="medium" (click)="closeModal()">
+    Cancelar
+  </ion-button>
+</main>
 
