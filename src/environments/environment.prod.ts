@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  WEATHERAPI_KEY:  '',
+  OPENWEATHER_KEY: '',
 };

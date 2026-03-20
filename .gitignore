@@ -70,4 +70,5 @@ testem.log
 Thumbs.db
 
 #Chaves 
+# Environments
 src/environments/environment.ts
