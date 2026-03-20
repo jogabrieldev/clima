@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, switchMap, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-//SERVICE BUSCAR POR CEP E PEGAR CLIMA
 
 @Injectable({ providedIn: 'root' })
 export class CepWeatherService {
