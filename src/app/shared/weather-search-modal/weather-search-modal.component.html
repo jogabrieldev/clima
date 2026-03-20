@@ -8,34 +8,47 @@
     <ion-icon name="cloud-outline" color="medium"></ion-icon>
     <ion-icon name="rainy-outline" color="primary"></ion-icon>
   </div>
-  <section class="radio-group">
-    <ion-radio-group [(ngModel)]="searchType" (ionChange)="query = ''">
-      <div class="radio-options">
-        <ion-item lines="none">
-          <ion-radio slot="start" value="city">Cidade</ion-radio>
-        </ion-item>
-       <ion-item lines="none">
-         <ion-radio slot="start" value="cep">CEP</ion-radio>
-        </ion-item>
-      </div>
-    </ion-radio-group>
-  </section>
-  <ion-item class="container-input" lines="none">
-    <ion-input
-     label="{{ searchType === 'city' ? 'Digite a cidade' : 'Digite o CEP' }}"
-     label-placement="floating"
-     [(ngModel)]="query"
-     [type]="searchType === 'cep' ? 'tel' : 'text'"
-     [maxlength]="searchType === 'cep' ? 9 : 50"
-     placeholder="{{ searchType === 'city' ? 'Ex: São Paulo' : 'Ex: 01001000' }}"
-     class="input-query">
-    </ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="submitSearch()" class="btn-search">
-    Buscar
+ <section class="section_search_dark">
+  <h2 class="title">☀️ Buscar clima</h2>
+  <div class="search-row">
+    <div class="type-selector">
+      <ion-radio-group [(ngModel)]="searchType" (ionChange)="changeSearchType()">
+        <div class="radio-pill" [class.active]="searchType === 'city'">
+          <ion-radio value="city"></ion-radio>
+          <ion-label>CID</ion-label>
+        </div>
+        <div class="radio-pill" [class.active]="searchType === 'cep'">
+          <ion-radio value="cep"></ion-radio>
+          <ion-label>CEP</ion-label>
+        </div>
+      </ion-radio-group>
+    </div>
+    <div class="input-wrapper">
+      <ion-select 
+        *ngIf="searchType === 'city'"
+        [(ngModel)]="query"
+        interface="popover" 
+        toggle-icon="chevron-down-outline"
+        placeholder="Cidade, UF"
+        class="custom-field">
+        <ion-select-option *ngFor="let state of states" [value]="state.capital">
+          {{ state.name }} ({{ state.uf }})
+        </ion-select-option>
+      </ion-select>
+      <ion-input
+        *ngIf="searchType === 'cep'"
+        [(ngModel)]="query"
+       (ionInput)="onCepInput($event)"
+       type="tel"
+       maxlength="9"
+       placeholder="00000-000"
+      class="custom-field">
+      </ion-input>
+    </div>
+  </div>
+  <ion-button expand="block" class="btn-search-primary" (click)="submitSearch()">
+    BUSCAR AGORA
   </ion-button>
-  <ion-button expand="block" fill="clear" color="medium" (click)="closeModal()">
-    Cancelar
-  </ion-button>
+</section>
 </main>
 

@@ -54,3 +54,14 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   }
 }
+
+ion-popover {
+  --width: 150px; 
+  --box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.custom-field {
+  width: 100%;
+  min-width: 60px; 
+  --placeholder-opacity: 0.8;
+}

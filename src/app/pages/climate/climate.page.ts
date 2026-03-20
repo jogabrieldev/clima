@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController , AlertController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, refreshOutline } from 'ionicons/icons';
+import { arrowBackOutline, 
+  refreshOutline, 
+  closeOutline, 
+  locationSharp, 
+  waterOutline,  
+  chevronDownOutline } from 'ionicons/icons';
 import { WeatherSearchModalComponent } from '../../shared/weather-search-modal/weather-search-modal.component';
 import { CityWeatherService } from 'src/services/weather.service';
 import { CepWeatherService } from 'src/services/cep.weather.service';
+import { ValidadeInputService } from 'src/services/validadeInput.service';
 
 addIcons({
   'arrow-back-outline': arrowBackOutline,
   'refresh-outline': refreshOutline,
+  'close-outline': closeOutline,
+  'chevron-down-outline': chevronDownOutline,
+  'location-sharp': locationSharp,
+  'water-outline': waterOutline,
 });
+
 
 @Component({
   selector: 'app-climate',
@@ -27,16 +38,43 @@ export class ClimatePage implements OnInit {
   public loading: boolean = false;
   public showModal:boolean = true;
   public errorMessage: string = '';
+  public isValidInput:boolean = false;
 
   constructor(
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     private weatherService: CityWeatherService,
-    private cepWeatherService: CepWeatherService
+    private cepWeatherService: CepWeatherService,
+    public validadeInputService: ValidadeInputService
   ) {}
 
   ngOnInit() {
     this.openSearchModal();
   };
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertCtrl.create({
+     header: header,
+     message: message,
+      buttons: [
+        {
+          text: 'Tentar novamente',
+          handler: () => {
+           this.openSearchModal();
+          }
+        },
+        {
+          text: 'Fechar',
+          handler: () => {
+           this.openSearchModal(); 
+          },
+         role: 'cancel'
+       }
+     ],
+       mode: 'ios' 
+    });
+    await alert.present();
+  }
 
   async openSearchModal() {
     const modal = await this.modalCtrl.create({
@@ -55,21 +93,40 @@ export class ClimatePage implements OnInit {
   }
 
   handleSearch(event: any) {
-    if (event) {
-      const { type, value } = event;
-      this.query = value.trim();
-      this.showModal = false; 
-      if (type === 'cep') {
-        this.fetchByCep(this.query);
-      } else {
-        this.fetchWeather(this.query);
-      }
-    } else {
-      this.showModal = false;
+    if (!event) {
+    this.showModal = false;
+    return;
     }
+    const { type, value } = event;
+    const queryTrimmed = value ? value.trim() : '';
+
+    if (type === 'cep') {
+     this.isValidInput = this.validadeInputService.validateCep(queryTrimmed);
+    } else {
+  
+    this.isValidInput = queryTrimmed.length > 0; 
+   }
+   if (!this.isValidInput) {
+    this.errorMessage = type === 'cep' 
+      ? 'Por favor, digite um CEP válido com 8 números.' 
+      : 'Por favor, selecione uma localização válida.';
+    this.showModal = false;
+    this.showAlert('Dados Inválidos', this.errorMessage);
+    return;
+  }
+  this.query = queryTrimmed;
+  this.showModal = false;
+
+  if (type === 'cep') {
+    const clearCep = this.query.replace(/\D/g, '');
+    this.fetchByCep(clearCep);
+  } else {
+    this.fetchWeather(this.query);
+  }
+  
   }
   fetchWeather(city: string) {
-   if(city) return;
+   if(!city) return;
    this.weatherData = null;
    this.errorMessage = '';
    this.loading = true;
@@ -86,8 +143,8 @@ export class ClimatePage implements OnInit {
         this.loading = false;
       },
       error: () => {
-       this.errorMessage = 'Cidade não encontrada.';
-       this.loading = false;
+      this.loading = false;
+      this.showAlert('Erro na Busca', 'Não conseguimos encontrar o clima para esta localização.'); 
       },
     });
   }
@@ -120,11 +177,19 @@ export class ClimatePage implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = err.message || 'CEP não encontrado.';
-        this.loading = false;
+       this.loading = false;
+       this.showAlert('CEP não encontrado', err.message || 'Verifique se o CEP está correto e tente novamente.');
       },
     });
   };
+  resetSearch() {
+    this.weatherData = null; 
+    this.query = ''; 
+    this.openSearchModal();
+  }
 };
+
+
+
 
 
