@@ -126,5 +126,13 @@
   }
 }
 
+@media(max-width: 680px) {
+    .custom-field {
+     font-size: 0.75rem; 
+     --placeholder-font-size: 0.85rem;
+     --padding-start: 8px;
+    }
+
+}
 
 

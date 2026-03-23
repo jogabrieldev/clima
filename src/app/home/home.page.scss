@@ -38,19 +38,18 @@
 .hero-icons {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 30px;
   margin-bottom: 20px;
 }
 
 .hero-icons ion-icon {
-  font-size: 2.5rem;
-  color: #ffeb3b;
+  font-size: 3.0rem;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-20px); }
 }
 
 ion-button {

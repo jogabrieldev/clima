@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController , AlertController} from '@ionic/angular';
+import { IonicModule, ModalController , AlertController , NavController} from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
@@ -43,6 +43,7 @@ export class ClimatePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
+    private navCtrl: NavController,
     private weatherService: CityWeatherService,
     private cepWeatherService: CepWeatherService,
     public validadeInputService: ValidadeInputService
@@ -87,8 +88,6 @@ export class ClimatePage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       this.handleSearch(data);
-    }else{
-      throw new Error("Nenhuma busca realizada. Modal fechada sem ação.")
     }
   }
 
@@ -186,6 +185,18 @@ export class ClimatePage implements OnInit {
     this.weatherData = null; 
     this.query = ''; 
     this.openSearchModal();
+  }
+
+  async goHome() {
+    try {
+     const topModal = await this.modalCtrl.getTop();
+      if (topModal) {
+       await this.modalCtrl.dismiss();
+      }
+    } catch (e) {
+     console.log('Nenhum modal aberto');
+    }
+    this.navCtrl.navigateRoot('/home');
   }
 };
 
