@@ -14,14 +14,7 @@ import { CityWeatherService } from 'src/services/weather.service';
 import { CepWeatherService } from 'src/services/cep.weather.service';
 import { ValidadeInputService } from 'src/services/validadeInput.service';
 
-addIcons({
-  'arrow-back-outline': arrowBackOutline,
-  'refresh-outline': refreshOutline,
-  'close-outline': closeOutline,
-  'chevron-down-outline': chevronDownOutline,
-  'location-sharp': locationSharp,
-  'water-outline': waterOutline,
-});
+
 
 
 @Component({
@@ -29,7 +22,7 @@ addIcons({
   templateUrl: './climate.page.html',
   styleUrls: ['./climate.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, WeatherSearchModalComponent],
 })
 
 export class ClimatePage implements OnInit {
@@ -47,7 +40,16 @@ export class ClimatePage implements OnInit {
     private weatherService: CityWeatherService,
     private cepWeatherService: CepWeatherService,
     public validadeInputService: ValidadeInputService
-  ) {}
+  ) {
+    addIcons({
+     'arrow-back-outline': arrowBackOutline,
+     'refresh-outline': refreshOutline,
+     'close-outline': closeOutline,
+     'chevron-down-outline': chevronDownOutline,
+     'location-sharp': locationSharp,
+     'water-outline': waterOutline,
+    });
+  }
 
   ngOnInit() {
     this.openSearchModal();
