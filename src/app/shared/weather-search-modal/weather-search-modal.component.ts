@@ -5,11 +5,6 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { sunnyOutline, cloudOutline, umbrellaOutline } from 'ionicons/icons';
 
-addIcons({
-  'sunny-outline': sunnyOutline,
-  'cloud-outline': cloudOutline,
-  'rainy-outline': umbrellaOutline 
-});
 
 interface state {
   name:string;
@@ -47,9 +42,13 @@ export class WeatherSearchModalComponent {
   ];
   
 
-  constructor(
-    private modalCtrl: ModalController,
-  ) {}
+  constructor(private modalCtrl: ModalController,) {
+    addIcons({
+      'sunny-outline': sunnyOutline,
+      'cloud-outline': cloudOutline,
+      'rainy-outline': umbrellaOutline 
+    });
+  }
 
   changeSearchType() {
     this.query = '';
