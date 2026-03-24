@@ -52,7 +52,10 @@ export class ClimatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.openSearchModal();
+    setTimeout(()=>{
+       this.openSearchModal();
+    },300)
+    
   };
 
   async showAlert(header: string, message: string) {

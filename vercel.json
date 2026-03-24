@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "trailingSlash": false,
   "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/svg/(.*)", "destination": "/svg/$1" },
+    { "source": "/(.*)\\.(js|css|png|jpg|svg|ico)", "destination": "/$1.$2" },
     { "source": "/(.*)", "destination": "/index" }
   ]
 }
